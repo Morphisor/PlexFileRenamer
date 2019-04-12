@@ -23,10 +23,7 @@ namespace PlexFileRenamer.Client.Pages.TestPage
         protected override void OnInit()
         {
             base.OnInit();
-            _appConfig.ApiKey = "3XCUY2O2JFI475D7";
-            _appConfig.UserKey = "LERUU731O96Z0JBV";
-            _appConfig.Username = "morphisor000hal";
-            _appConfig.TheTvDbConfig.EndPoint = "https://tvdbapiproxy.leonekmi.fr";
+            _appConfig.TheTvDbConfig.EndPoint = "http://localhost:51392/thetvdb";
             _appConfig.TheTvDbConfig.DefaultLanguage = new Language()
             {
                 Abbreviation = "en",

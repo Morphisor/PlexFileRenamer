@@ -8,9 +8,6 @@ namespace PlexFileRenamer.Services.AppConfig
 {
     public class AppConfigService : IAppConfigService
     {
-        public string ApiKey { get; set; }
-        public string UserKey { get; set; }
-        public string Username { get; set; }
         public TheTvDbConfig TheTvDbConfig { get; set; }
 
         public AppConfigService()

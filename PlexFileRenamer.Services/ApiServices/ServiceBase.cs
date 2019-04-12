@@ -80,6 +80,9 @@ namespace PlexFileRenamer.Services.ApiServices
 
             if (languageHeader.HasValue)
                 _httpClient.DefaultRequestHeaders.Add(languageHeader.Value.Key, languageHeader.Value.Value);
+
+            if(!_httpClient.DefaultRequestHeaders.Contains("Accept"))
+                _httpClient.DefaultRequestHeaders.Add("accept", "application/json");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlexFileRenamer.Models.ApiModels.TheTvDb.Authentication;
+using System;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Text;
@@ -8,7 +9,7 @@ namespace PlexFileRenamer.Interfaces.Services.TheTvDb
 {
     public interface IAuthenticationService
     {
-        Task Login();
+        Task<LoginResponse> Login();
         Task Refresh();
         AuthenticationHeaderValue GetAuthHeader();
     }

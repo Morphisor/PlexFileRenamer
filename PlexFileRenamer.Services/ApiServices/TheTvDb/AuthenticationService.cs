@@ -16,19 +16,20 @@ namespace PlexFileRenamer.Services.ApiServices.TheTvDb
         {
         }
 
-        public async Task Login()
+        public async Task<LoginResponse> Login()
         {
             var loginModel = new LoginRequest()
             {
-                ApiKey = _appConfigService.ApiKey,
-                UserKey = _appConfigService.UserKey,
-                Username = _appConfigService.Username
+                ApiKey = _appConfigService.TheTvDbConfig.ApiKey,
+                UserKey = _appConfigService.TheTvDbConfig.UserKey,
+                Username = _appConfigService.TheTvDbConfig.Username
             };
             var response = await GenericPost<LoginResponse>($"{_appConfigService.TheTvDbConfig.EndPoint}/login", loginModel);
             if(response != null)
             {
                 _appConfigService.TheTvDbConfig.Token = response.Token;
             }
+            return response;
         }
 
         public async Task Refresh()

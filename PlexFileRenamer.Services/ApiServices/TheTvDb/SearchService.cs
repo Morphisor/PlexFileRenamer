@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,8 @@ namespace PlexFileRenamer.Services.ApiServices.TheTvDb
 
         public async Task<SearchResponse> Search(string name)
         {
-            var response = await GenericGet<SearchResponse>($"{_appConfigService.TheTvDbConfig.EndPoint}/search/series?name={name}", _authService.GetAuthHeader(), GetLanguageHeader());
+            var encodedName = WebUtility.HtmlEncode(name);
+            var response = await GenericGet<SearchResponse>($"{_appConfigService.TheTvDbConfig.EndPoint}/search/series?name={encodedName}", _authService.GetAuthHeader(), GetLanguageHeader());
             return response;
         }
     }

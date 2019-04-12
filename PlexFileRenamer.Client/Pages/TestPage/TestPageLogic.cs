@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Newtonsoft.Json;
 using PlexFileRenamer.Interfaces.Services.AppConfig;
 using PlexFileRenamer.Interfaces.Services.TheTvDb;
 using PlexFileRenamer.Models.ApiModels.TheTvDb.Languages;
@@ -20,7 +21,10 @@ namespace PlexFileRenamer.Client.Pages.TestPage
         [Inject]
         private IAppConfigService _appConfig { get; set; }
 
-        protected override void OnInit()
+        protected string SearchTerm { get; set; }
+        protected string SearchResult { get; set; }
+
+        protected override async void OnInit()
         {
             base.OnInit();
             _appConfig.TheTvDbConfig.EndPoint = "http://localhost:51392/thetvdb";
@@ -31,13 +35,15 @@ namespace PlexFileRenamer.Client.Pages.TestPage
                 Name = "English",
                 Id = 7
             };
+            await _authService.Login();
+            StateHasChanged();
         }
 
-        protected async Task Test()
+        protected async Task Search()
         {
-            await _authService.Login();
-            var result = await _searchService.Search("Narcos");
-            Console.WriteLine(result);
+            var result = await _searchService.Search(SearchTerm);
+            SearchResult = JsonConvert.SerializeObject(result);
+            StateHasChanged();
         }
     }
 }

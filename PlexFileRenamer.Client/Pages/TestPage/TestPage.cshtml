@@ -1,4 +1,16 @@
 ﻿@page "/test"
 @inherits TestPageLogic
 
-<button type="button" class="btn btn-primary" onclick="@Test">Test</button>
+<div class="row">
+    <div class="col-12">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" bind="@SearchTerm" />
+        </div>
+        <button type="button" class="btn btn-primary" onclick="@Search">Search</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <p>@SearchResult</p>
+    </div>
+</div>

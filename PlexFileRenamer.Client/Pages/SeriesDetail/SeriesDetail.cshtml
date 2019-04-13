@@ -1,0 +1,42 @@
+﻿@page "/series/{SeriesId}"
+@inherits SeriesDetailLogic
+
+@if (IsLoading)
+{
+    <Loader></Loader>
+}
+
+@if (SeriesDetails != null && !IsLoading)
+{
+    <div class="card">
+        @if (!string.IsNullOrEmpty(SeriesDetails.Banner))
+        {
+            <img src="https://www.thetvdb.com/banners/@SeriesDetails.Banner" class="card-img-top" alt="...">
+        }
+        <div class="card-body">
+            <h5 class="card-title">@SeriesDetails.SeriesName</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@SeriesDetails.Status</h6>
+            <p>@SeriesDetails.Overview</p>
+            <div class="row">
+                <div class="col-4">
+                    <h6>Genre:&nbsp;</h6>
+                    <p>@string.Join(", ", SeriesDetails.Genre)</p>
+                </div>
+                <div class="col-4">
+                    <h6>Network:&nbsp;</h6>
+                    <p>@SeriesDetails.Network</p>
+                </div>
+                <div class="col-4">
+                    <h6>Rating:&nbsp;</h6>
+                    <p>@SeriesDetails.Rating</p>
+                </div>
+            </div>
+            @if (EpisodePage != null && !IsLoading)
+            {
+                <h4>Episodes:</h4>
+
+            }
+
+        </div>
+    </div>
+}

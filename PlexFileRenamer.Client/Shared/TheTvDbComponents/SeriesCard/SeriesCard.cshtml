@@ -1,0 +1,14 @@
+﻿@inherits SeriesCardLogic
+
+<div class="card">
+    @if (!string.IsNullOrEmpty(Series.Banner))
+    {
+        <img src="https://www.thetvdb.com/banners/@Series.Banner" class="card-img-top" alt="...">
+    }
+    <div class="card-body">
+        <h5 class="card-title">@Series.SeriesName</h5>
+        <h6 class="card-subtitle mb-2 text-muted">@Series.Status</h6>
+        <p>@Series.Overview</p>
+        <a href="/series/@Series.Id" class="card-link">Details</a>
+    </div>
+</div>

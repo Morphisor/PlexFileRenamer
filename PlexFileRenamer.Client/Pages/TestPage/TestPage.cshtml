@@ -20,33 +20,12 @@
 @if (SearchResult != null && !IsLoading)
 {
     <div class="row mb-2">
-        <div class="col-12">
-            @foreach (var series in SearchResult.Data)
-            {
-                <div class="row mb-2">
-                    <div class="col-12">
-                        <img src="https://www.thetvdb.com/banners/@series.Banner"/>
-                    </div>
-                    <div class="col-4">
-                        <h6>Name:&nbsp;</h6>
-                        <p class="lead">@series.SeriesName</p>
-                    </div>
-                    <div class="col-4">
-                        <h6>Network:&nbsp;</h6>
-                        <p class="lead">@series.Network</p>
-                    </div>
-                    <div class="col-4">
-                        <h6>Status:&nbsp;</h6>
-                        <p class="lead">@series.Status</p>
-                    </div>
-                    <div class="col-12">
-                        <h6>Overview:&nbsp;</h6>
-                        <p class="lead">@series.Overview</p>
-                    </div>
-                </div>
-                <hr />
-            }
+        @foreach (var series in SearchResult.Data)
+        {
+        <div class="col-4 mb-5">
+            <SeriesCard Series="@series"></SeriesCard>
         </div>
+        }
     </div>
 }
 

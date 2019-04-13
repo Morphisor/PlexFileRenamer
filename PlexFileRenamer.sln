@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlexFileRenamer.Models", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlexFileRenamer.Services", "PlexFileRenamer.Services\PlexFileRenamer.Services.csproj", "{BA008E7C-77F5-4379-A2AE-AF59BEC286ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlexFileRenamer.Server", "PlexFileRenamer.Server\PlexFileRenamer.Server.csproj", "{E931D493-064D-495C-8025-0D4357156A08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlexFileRenamer.Server", "PlexFileRenamer.Server\PlexFileRenamer.Server.csproj", "{E931D493-064D-495C-8025-0D4357156A08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

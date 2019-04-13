@@ -1,0 +1,30 @@
+﻿@page "/search"
+@inherits SeriesSearchLogic
+
+<div class="row mb-2">
+    <div class="col-11">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" bind="@SearchTerm" />
+        </div>
+    </div>
+    <div class="col-1">
+        <button type="button" class="btn btn-primary" onclick="@Search">Search</button>
+    </div>
+</div>
+
+@if (IsLoading)
+{
+    <Loader></Loader>
+}
+
+@if (SearchResult != null && !IsLoading)
+{
+    <div class="row mb-2">
+        @foreach (var series in SearchResult.Data)
+        {
+            <div class="col-4 mb-5">
+                <SeriesCard Series="@series"></SeriesCard>
+            </div>
+        }
+    </div>
+}

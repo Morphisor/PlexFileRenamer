@@ -1,16 +1,71 @@
 ﻿@page "/test"
 @inherits TestPageLogic
 
-<div class="row">
-    <div class="col-12">
+<div class="row mb-2">
+    <div class="col-11">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" bind="@SearchTerm" />
         </div>
+    </div>
+    <div class="col-1">
         <button type="button" class="btn btn-primary" onclick="@Search">Search</button>
     </div>
 </div>
-<div class="row">
-    <div class="col-12">
-        <p>@SearchResult</p>
+
+@if (IsLoading)
+{
+    <Loader></Loader>
+}
+
+@if (SearchResult != null && !IsLoading)
+{
+    <div class="row mb-2">
+        <div class="col-12">
+            @foreach (var series in SearchResult.Data)
+            {
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <img src="https://www.thetvdb.com/banners/@series.Banner"/>
+                    </div>
+                    <div class="col-4">
+                        <h6>Name:&nbsp;</h6>
+                        <p class="lead">@series.SeriesName</p>
+                    </div>
+                    <div class="col-4">
+                        <h6>Network:&nbsp;</h6>
+                        <p class="lead">@series.Network</p>
+                    </div>
+                    <div class="col-4">
+                        <h6>Status:&nbsp;</h6>
+                        <p class="lead">@series.Status</p>
+                    </div>
+                    <div class="col-12">
+                        <h6>Overview:&nbsp;</h6>
+                        <p class="lead">@series.Overview</p>
+                    </div>
+                </div>
+                <hr />
+            }
+        </div>
     </div>
-</div>
+}
+
+@if (1 != 1)
+{
+    <div class="row mb-2">
+        <div class="col-12">
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01" multiple="multiple" onchange="@OnFilesSelected" />
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <p>@SearchResult</p>
+        </div>
+    </div>
+}

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using PlexFileRenamer.Interfaces.Services.AppConfig;
 using PlexFileRenamer.Interfaces.Services.TheTvDb;
 using PlexFileRenamer.Models.ApiModels.TheTvDb.Languages;
+using PlexFileRenamer.Models.ApiModels.TheTvDb.Search;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +23,24 @@ namespace PlexFileRenamer.Client.Pages.TestPage
         [Inject]
         private IAppConfigService _appConfig { get; set; }
 
+        [Inject]
+        private IJSRuntime _interop { get; set; }
+
         protected string SearchTerm { get; set; }
-        protected string SearchResult { get; set; }
+        protected SearchResponse SearchResult { get; set; }
+
+        private bool _isLoading;
+        protected bool IsLoading {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                _isLoading = value;
+                StateHasChanged();
+            }
+        }
 
         protected override async void OnInit()
         {
@@ -41,8 +59,14 @@ namespace PlexFileRenamer.Client.Pages.TestPage
 
         protected async Task Search()
         {
-            var result = await _searchService.Search(SearchTerm);
-            SearchResult = JsonConvert.SerializeObject(result);
+            IsLoading = true;
+            SearchResult = await _searchService.Search(SearchTerm);
+            IsLoading = false;
+        }
+
+        protected async Task OnFilesSelected()
+        {
+            var files = await _interop.InvokeAsync<string[]>("blazorInterop.utils.getInputFiles", "inputGroupFile01");
             StateHasChanged();
         }
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
@@ -32,6 +33,7 @@ namespace PlexFileRenamer.Server.Controllers.TheTvDbControllers
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
+            HttpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
             BuildAppConfig();
         }
 

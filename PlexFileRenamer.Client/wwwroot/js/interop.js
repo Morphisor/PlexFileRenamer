@@ -27,6 +27,15 @@
         triggerNavigation: function (url) {
             window.location.href = url;
             return true;
+        },
+        getInputFiles: function (inputId) {
+            var inputElement = document.getElementById(inputId);
+            var result = [];
+            for (var i = 0; i < inputElement.files.length; i++) {
+                var file = inputElement.files[i];
+                result.push(file.name);
+            }
+            return result;
         }
     }
 }

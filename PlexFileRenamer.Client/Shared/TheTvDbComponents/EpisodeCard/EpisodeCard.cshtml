@@ -1,0 +1,13 @@
+﻿@inherits EpisodeCardLogic
+@using PlexFileRenamer.Client.Utils
+
+<div class="card">
+    @if (!string.IsNullOrEmpty(Episode.Filename))
+    {
+        <img src="https://www.thetvdb.com/banners/@Episode.Filename"/>
+    }
+    <div class="card-body">
+        <h6 class="card-title">@Episode.AiredEpisodeNumber @Episode.EpisodeName</h6>
+        <p>@Episode.Overview.Ellipsis(250)</p>
+    </div>
+</div>

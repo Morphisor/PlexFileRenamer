@@ -14,8 +14,8 @@
             <img src="https://www.thetvdb.com/banners/@SeriesDetails.Banner" class="card-img-top" alt="...">
         }
         <div class="card-body">
-            <h5 class="card-title">@SeriesDetails.SeriesName</h5>
-            <h6 class="card-subtitle mb-2 text-muted">@SeriesDetails.Status</h6>
+            <h4 class="card-title">@SeriesDetails.SeriesName</h4>
+            <h5 class="card-subtitle mb-2 text-muted">@SeriesDetails.Status</h5>
             <p>@SeriesDetails.Overview</p>
             <div class="row">
                 <div class="col-4">
@@ -31,10 +31,23 @@
                     <p>@SeriesDetails.FirstAired</p>
                 </div>
             </div>
-            @if (EpisodePage != null && !IsLoading)
-            {
-                <h4>Episodes:</h4>
 
+            @if (AreEpisodesLoading)
+            {
+                <Loader></Loader>
+            }
+
+            @if (SeasonEpisodes != null && !AreEpisodesLoading)
+            {
+                <div class="row">
+                    <h4>Seasons:</h4>
+                    @for (int i = 0; i < SeasonEpisodes.Count; i++)
+                    {
+                        <div class="col-12">
+                            <SeasonCard Episodes="@SeasonEpisodes[i]" SeasonIndex="@i"></SeasonCard>
+                        </div>
+                    }
+                </div>
             }
 
         </div>

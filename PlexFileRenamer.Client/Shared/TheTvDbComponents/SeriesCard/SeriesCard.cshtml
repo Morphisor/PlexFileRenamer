@@ -1,4 +1,6 @@
 ﻿@inherits SeriesCardLogic
+@using PlexFileRenamer.Client.Utils
+
 
 <div class="card">
     @if (!string.IsNullOrEmpty(Series.Banner))
@@ -8,7 +10,7 @@
     <div class="card-body">
         <h5 class="card-title">@Series.SeriesName</h5>
         <h6 class="card-subtitle mb-2 text-muted">@Series.Status</h6>
-        <p>@Series.Overview</p>
+        <p>@Series.Overview.Ellipsis(430)</p>
         <a href="/series/@Series.Id" class="card-link">Details</a>
     </div>
 </div>

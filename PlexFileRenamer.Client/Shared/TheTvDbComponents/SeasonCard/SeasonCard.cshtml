@@ -1,0 +1,27 @@
+﻿@inherits SeasonCardLogic
+
+<div class="card mb-2">
+    <div class="card-body">
+        <div class="row">
+            <h5 class="card-title">Season @SeasonIndex</h5>
+            <button type="button" class="btn btn-link ml-auto" onclick="@Collapse">Collapse</button>
+        </div>
+
+        @if (IsCollapsed)
+        {
+            <h6 class="card-subtitle">Number of episodes: @Episodes.Count</h6>
+        }
+
+        @if (!IsCollapsed)
+        {
+            <div class="row">
+                @foreach (var episode in Episodes)
+                {
+                    <div class="col-3 mb-2">
+                        <EpisodeCard Episode="@episode"></EpisodeCard>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

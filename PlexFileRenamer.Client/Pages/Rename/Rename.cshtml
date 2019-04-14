@@ -1,0 +1,75 @@
+﻿@page "/rename/{SeriesId}"
+@inherits RenameLogic
+
+@if (IsLoading)
+{
+    <Loader></Loader>
+}
+
+@if (SeriesDetails != null && !IsLoading)
+{
+    <div class="card">
+        @if (!string.IsNullOrEmpty(SeriesDetails.Banner))
+        {
+            <img src="https://www.thetvdb.com/banners/@SeriesDetails.Banner" class="card-img-top" alt="...">
+        }
+        <div class="card-body">
+            <h4 class="card-title">@SeriesDetails.SeriesName</h4>
+            <h5 class="card-subtitle mb-2 text-muted">@SeriesDetails.Status</h5>
+            <hr />
+            @if (AreEpisodesLoading)
+            {
+                <Loader></Loader>
+            }
+
+            @if (SeasonEpisodes != null && !AreEpisodesLoading)
+            {
+                <div class="row">
+                    <div class="col-6">
+                        <label for="inputGroupFile01">Select Files</label>
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" multiple="multiple" onchange="@OnFilesSelected" />
+                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label for="customSelect">Select Season</label>
+                        <select class="custom-select" id="customSelect" bind="@SelectedSeason">
+                            @for (int i = 0; i < SeasonEpisodes.Count; i++)
+                            {
+                                <option value="@i">Season @i</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        @if (FileNames != null)
+                        {
+                            <div class="card">
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var file in FileNames)
+                                    {
+                                        <li class="list-group-item">@file</li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                @foreach (var episode in SeasonEpisodes[SelectedSeason])
+                                {
+                                    <li class="list-group-item">@episode.AiredEpisodeNumber @episode.EpisodeName</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

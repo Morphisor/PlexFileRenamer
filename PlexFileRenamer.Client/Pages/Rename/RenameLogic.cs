@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using PlexFileRenamer.Client.Serivices.EpisodeLoader;
 using PlexFileRenamer.Interfaces.Services.TheTvDb;
 using PlexFileRenamer.Models.ApiModels.TheTvDb.Episode;
@@ -8,9 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PlexFileRenamer.Client.Pages.SeriesDetail
+namespace PlexFileRenamer.Client.Pages.Rename
 {
-    public class SeriesDetailLogic : TheTvDbBasePage
+    public class RenameLogic : TheTvDbBasePage
     {
         [Parameter]
         protected string SeriesId { get; set; }
@@ -21,8 +22,13 @@ namespace PlexFileRenamer.Client.Pages.SeriesDetail
         [Inject]
         private IEpisodeLoaderService _episodeLoaderService { get; set; }
 
+        [Inject]
+        private IJSRuntime _interop { get; set; }
+
         protected Series SeriesDetails { get; set; }
         protected List<List<Episode>> SeasonEpisodes { get; set; }
+        protected string[] FileNames { get; set; }
+        protected int SelectedSeason { get; set; }
 
         private bool _isLoading;
         protected bool IsLoading
@@ -66,6 +72,12 @@ namespace PlexFileRenamer.Client.Pages.SeriesDetail
             AreEpisodesLoading = true;
             SeasonEpisodes = await _episodeLoaderService.RetrieveAllEpisodes(int.Parse(SeriesId));
             AreEpisodesLoading = false;
+        }
+
+        protected async Task OnFilesSelected()
+        {
+            FileNames = await _interop.InvokeAsync<string[]>("blazorInterop.utils.getInputFiles", "inputGroupFile01");
+            StateHasChanged();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using PlexFileRenamer.Client.Serivices.EpisodeLoader;
+using PlexFileRenamer.Client.Serivices.Rename;
 using PlexFileRenamer.Interfaces.Services.TheTvDb;
 using PlexFileRenamer.Models.ApiModels.TheTvDb.Episode;
 using PlexFileRenamer.Models.ApiModels.TheTvDb.Series;
@@ -25,10 +26,27 @@ namespace PlexFileRenamer.Client.Pages.Rename
         [Inject]
         private IJSRuntime _interop { get; set; }
 
+        [Inject]
+        private IRenameService _renameService { get; set; }
+
         protected Series SeriesDetails { get; set; }
         protected List<List<Episode>> SeasonEpisodes { get; set; }
         protected string[] FileNames { get; set; }
-        protected int SelectedSeason { get; set; }
+        protected string BaseFilePath { get; set; }
+
+        private int _selectedSeason;
+        protected int SelectedSeason
+        {
+            get
+            {
+                return _selectedSeason;
+            }
+            set
+            {
+                _selectedSeason = value;
+                OnChangeMatch();
+            }
+        }
 
         private bool _isLoading;
         protected bool IsLoading
@@ -77,7 +95,19 @@ namespace PlexFileRenamer.Client.Pages.Rename
         protected async Task OnFilesSelected()
         {
             FileNames = await _interop.InvokeAsync<string[]>("blazorInterop.utils.getInputFiles", "inputGroupFile01");
+            OnChangeMatch();
             StateHasChanged();
+        }
+
+        protected void OnSubmit()
+        {
+            Console.WriteLine("Clicked submit");
+        }
+
+        private void OnChangeMatch()
+        {
+            var seasonEpisodes = SeasonEpisodes[SelectedSeason];
+            FileNames = _renameService.MatchFilesToSeason(seasonEpisodes, FileNames);
         }
     }
 }

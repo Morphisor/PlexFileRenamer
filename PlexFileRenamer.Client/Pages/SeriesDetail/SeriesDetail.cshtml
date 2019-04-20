@@ -47,7 +47,7 @@
                     @for (int i = 0; i < SeasonEpisodes.Count; i++)
                     {
                         <div class="col-12">
-                            <SeasonCard Episodes="@SeasonEpisodes[i]" SeasonIndex="@i"></SeasonCard>
+                            <SeasonCard Episodes="@SeasonEpisodes[i]" SeasonIndex="@(i + 1)"></SeasonCard>
                         </div>
                     }
                 </div>

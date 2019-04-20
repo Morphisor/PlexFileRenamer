@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using PlexFileRenamer.Client.Serivices.EpisodeLoader;
+using PlexFileRenamer.Client.Serivices.Rename;
 using PlexFileRenamer.Interfaces.Services.AppConfig;
 using PlexFileRenamer.Interfaces.Services.LocalStorage;
 using PlexFileRenamer.Interfaces.Services.SessionStorage;
@@ -28,6 +29,7 @@ namespace PlexFileRenamer.Client
             services.AddTransient<ISeriesService, SeriesService>();
 
             services.AddTransient<IEpisodeLoaderService, EpisodeLoaderService>();
+            services.AddTransient<IRenameService, RenameService>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

@@ -22,8 +22,20 @@
                 <Loader></Loader>
             }
 
+
             @if (SeasonEpisodes != null && !AreEpisodesLoading)
             {
+                <div class="row">
+                    <div class="col-11">
+                        <input type="text" class="form-control" placeholder="base file path" bind="@BaseFilePath" />
+                    </div>
+                    <div class="col-1">
+                        <button type="button" class="btn btn-primary" onclick="@OnSubmit">Submit</button>
+                    </div>
+                </div>
+
+                <hr />
+
                 <div class="row">
                     <div class="col-6">
                         <label for="inputGroupFile01">Select Files</label>
@@ -39,7 +51,7 @@
                         <select class="custom-select" id="customSelect" bind="@SelectedSeason">
                             @for (int i = 0; i < SeasonEpisodes.Count; i++)
                             {
-                                <option value="@i">Season @i</option>
+                                <option value="@i">Season @(i + 1)</option>
                             }
                         </select>
                     </div>

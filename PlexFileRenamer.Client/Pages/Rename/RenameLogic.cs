@@ -99,9 +99,11 @@ namespace PlexFileRenamer.Client.Pages.Rename
             StateHasChanged();
         }
 
-        protected void OnSubmit()
+        protected async void OnSubmit()
         {
-            Console.WriteLine("Clicked submit");
+            var result = _renameService.GenerateBatchScript(SeasonEpisodes[SelectedSeason], FileNames, SelectedSeason, SeriesDetails.SeriesName, BaseFilePath);
+            await _interop.InvokeAsync<bool>("blazorInterop.utils.downloadFile", "rename.bat", result);
+            Console.WriteLine(result);
         }
 
         private void OnChangeMatch()

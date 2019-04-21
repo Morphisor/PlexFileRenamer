@@ -9,5 +9,6 @@ namespace PlexFileRenamer.Client.Serivices.Rename
     public interface IRenameService
     {
         string[] MatchFilesToSeason(List<Episode> seasonEpisodes, string[] files);
+        string GenerateBatchScript(List<Episode> seasonEpisodes, string[] files, int seasonIndex, string seriesName, string basePath);
     }
 }

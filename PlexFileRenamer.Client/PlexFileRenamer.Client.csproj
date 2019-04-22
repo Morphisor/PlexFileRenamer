@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\assets\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PlexFileRenamer.Interfaces\PlexFileRenamer.Interfaces.csproj" />
     <ProjectReference Include="..\PlexFileRenamer.Models\PlexFileRenamer.Models.csproj" />
     <ProjectReference Include="..\PlexFileRenamer.Services\PlexFileRenamer.Services.csproj" />

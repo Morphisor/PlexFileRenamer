@@ -20,6 +20,5 @@ function logAppInstalled(evt) {
 }
 
 let deferredInstallPrompt = null;
-installButton.addEventListener('click', installPWA);
 window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
 window.addEventListener('appinstalled', logAppInstalled);

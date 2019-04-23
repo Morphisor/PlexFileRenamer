@@ -68,7 +68,7 @@ namespace PlexFileRenamer.Services.ApiServices
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }
+            } 
 
             return toReturn;
         }

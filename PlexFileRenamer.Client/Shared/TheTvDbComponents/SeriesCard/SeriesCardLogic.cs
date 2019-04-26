@@ -11,5 +11,11 @@ namespace PlexFileRenamer.Client.Shared.TheTvDbComponents.SeriesCard
     {
         [Parameter]
         protected Search Series { get; set; }
+
+        protected override void OnInit()
+        {
+            base.OnInit();
+            Console.WriteLine("init Series card");
+        }
     }
 }

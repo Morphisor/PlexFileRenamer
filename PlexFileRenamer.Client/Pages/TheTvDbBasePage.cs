@@ -22,7 +22,7 @@ namespace PlexFileRenamer.Client.Pages
             base.OnInit();
             if (string.IsNullOrEmpty(_appConfig.TheTvDbConfig.Token))
             {
-                _appConfig.TheTvDbConfig.EndPoint = "https://plexfilerenamerserver.azurewebsites.net/thetvdb";
+                _appConfig.TheTvDbConfig.EndPoint = "http://localhost:51392/thetvdb";
                 _appConfig.TheTvDbConfig.DefaultLanguage = new Language()
                 {
                     Abbreviation = "en",

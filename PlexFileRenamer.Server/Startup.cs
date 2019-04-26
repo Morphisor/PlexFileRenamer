@@ -67,9 +67,11 @@ namespace PlexFileRenamer.Server
 
             app.UseCors("AllOrigins");
 
-            app.UseRouting(routes =>
+            app.UseRouting();
+
+            app.UseEndpoints(routes =>
             {
-                routes.MapControllers();
+                routes.MapDefaultControllerRoute();
             });
 
             app.UseAuthorization();

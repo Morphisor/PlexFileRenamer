@@ -27,12 +27,25 @@ namespace PlexFileRenamer.Client.Serivices.Rename
                 var filename = Path.GetFileNameWithoutExtension(file);
                 var fileExt = Path.GetExtension(file);
                 var episode = seasonEpisodes[i];
-                builder.Append($"ren \"{filename}{fileExt}\" \"{seriesName} - {seasonIndex + 1}x{episode.AiredEpisodeNumber?.ToString("D2")} - {episode.EpisodeName}{fileExt}\" \n");
+                builder.Append($"ren \"{filename}{fileExt}\" \"{seriesName} - {seasonIndex + 1}x{episode.AiredEpisodeNumber?.ToString("D2")} - {SanitizeEpisodeName(episode.EpisodeName)}{fileExt}\" \n");
             }
 
             builder.Append("popd");
 
             return builder.ToString();
+        }
+
+        private string SanitizeEpisodeName(string episodeName)
+        {
+            string invalidChars = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+            string sanitized = episodeName;
+
+            foreach (var c in invalidChars)
+            {
+                sanitized = sanitized.Replace(c.ToString(), "");
+            }
+
+            return sanitized;
         }
     }
 }

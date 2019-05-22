@@ -48,20 +48,6 @@ namespace PlexFileRenamer.Client.Pages.Rename
             }
         }
 
-        private bool _isLoading;
-        protected bool IsLoading
-        {
-            get
-            {
-                return _isLoading;
-            }
-            set
-            {
-                _isLoading = value;
-                StateHasChanged();
-            }
-        }
-
         private bool _areEpisodesLoading;
         protected bool AreEpisodesLoading
         {

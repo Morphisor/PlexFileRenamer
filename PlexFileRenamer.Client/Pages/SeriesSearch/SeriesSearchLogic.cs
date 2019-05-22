@@ -16,20 +16,6 @@ namespace PlexFileRenamer.Client.Pages.SeriesSearch
         protected string SearchTerm { get; set; }
         protected SearchResponse SearchResult { get; set; }
 
-        private bool _isLoading;
-        protected bool IsLoading
-        {
-            get
-            {
-                return _isLoading;
-            }
-            set
-            {
-                _isLoading = value;
-                StateHasChanged();
-            }
-        }
-
         protected async Task Search()
         {
             IsLoading = true;

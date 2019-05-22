@@ -24,20 +24,6 @@ namespace PlexFileRenamer.Client.Pages.SeriesDetail
         protected Series SeriesDetails { get; set; }
         protected List<List<Episode>> SeasonEpisodes { get; set; }
 
-        private bool _isLoading;
-        protected bool IsLoading
-        {
-            get
-            {
-                return _isLoading;
-            }
-            set
-            {
-                _isLoading = value;
-                StateHasChanged();
-            }
-        }
-
         private bool _areEpisodesLoading;
         protected bool AreEpisodesLoading
         {
